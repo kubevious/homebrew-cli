@@ -11,10 +11,11 @@ class Kubevious < Formula
 
   def install
     system "npm", "install", *Language::Node.std_npm_install_args(libexec)
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    (bin/"kubevious").write_env_script libexec/"bin/kubevious", PATH: "#{Formula["node@14"].opt_bin}:$PATH"
   end
 
   test do
-    system bin/"kubevious", "--version"
+    assert_match "v1.0.20",
+      shell_output("#{bin}/kubevious --version")
   end
 end
