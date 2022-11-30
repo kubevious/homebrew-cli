@@ -33,6 +33,16 @@ git checkout master
 git pull origin master
 ```
 
+### Rebase From Upstream
+```sh
+git remote add upstream https://github.com/Homebrew/homebrew-core.git
+
+git fetch upstream
+git rebase upstream/master
+git push origin master --force
+```
+
+
 ### Current Errors:
 * Formulae in homebrew/core must specify a license.
 * GitHub repository not notable enough (<30 forks, <30 watchers and <75 stars)
