@@ -1,11 +1,16 @@
 require "language/node"
 
 class Kubevious < Formula
-  desc "Detects and prevent Kubernetes misconfigurations and violations"
+  desc "Detects and prevents Kubernetes misconfigurations and violations"
   homepage "https://github.com/kubevious/kubevious"
-  url "https://github.com/kubevious/cli-releases/raw/main/v1.0.20/npm/kubevious.tgz"
-  sha256 "86942cf385472e2650b9032894643dd3cc1557575aa9336120ffec08ecf391f0"
+  url "https://registry.npmjs.org/kubevious/-/kubevious-1.0.20.tgz"
+  sha256 "e28483f532294de2f0a943ba4421efb8885211738db02b50e9f59308d25ec9fc"
   license "Apache-2.0"
+
+  livecheck do
+    url "https://registry.npmjs.org/kubevious/latest"
+    regex(/["']version["']:\s*?["']([^"']+)["']/i)
+  end
 
   depends_on "node@14"
 
