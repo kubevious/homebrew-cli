@@ -20,7 +20,7 @@ class Kubevious < Formula
   end
 
   test do
-    assert_match "v1.0.23",
+    assert_match version.to_s,
       shell_output("#{bin}/kubevious --version")
 
     (testpath/"deployment.yml").write <<~EOF
