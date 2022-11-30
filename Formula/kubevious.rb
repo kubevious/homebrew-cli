@@ -24,51 +24,51 @@ class Kubevious < Formula
       shell_output("#{bin}/kubevious --version")
 
     (testpath/"deployment.yml").write <<~EOF
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx
-spec:
-  selector:
-    matchLabels:
-      app: nginx
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.14.2
-        ports:
-        - containerPort: 80
-EOF
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: nginx
+      spec:
+        selector:
+          matchLabels:
+            app: nginx
+        replicas: 1
+        template:
+          metadata:
+            labels:
+              app: nginx
+          spec:
+            containers:
+            - name: nginx
+              image: nginx:1.14.2
+              ports:
+              - containerPort: 80
+    EOF
 
     assert_match "Lint Succeeded",
       shell_output("#{bin}/kubevious lint #{testpath}/deployment.yml")
 
     (testpath/"bad-deployment.yml").write <<~EOF
-apiVersion: apps/v1
-kind: BadDeployment
-metadata:
-  name: nginx
-spec:
-  selector:
-    matchLabels:
-      app: nginx
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.14.2
-        ports:
-        - containerPort: 80
-EOF
+      apiVersion: apps/v1
+      kind: BadDeployment
+      metadata:
+        name: nginx
+      spec:
+        selector:
+          matchLabels:
+            app: nginx
+        replicas: 1
+        template:
+          metadata:
+            labels:
+              app: nginx
+          spec:
+            containers:
+            - name: nginx
+              image: nginx:1.14.2
+              ports:
+              - containerPort: 80
+    EOF
 
     assert_match "Lint Failed",
       shell_output("#{bin}/kubevious lint #{testpath}/bad-deployment.yml", 100)
@@ -80,27 +80,26 @@ EOF
       shell_output("#{bin}/kubevious guard #{testpath}/bad-deployment.yml", 100)
 
     (testpath/"service.yml").write <<~EOF
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: nginx
-  name: nginx
-spec:
-  type: ClusterIP
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8080
-  selector:
-    app: nginx
-EOF
+      apiVersion: v1
+      kind: Service
+      metadata:
+        labels:
+          app: nginx
+        name: nginx
+      spec:
+        type: ClusterIP
+        ports:
+        - name: http
+          port: 80
+          targetPort: 8080
+        selector:
+          app: nginx
+    EOF
 
     assert_match "Guard Failed",
       shell_output("#{bin}/kubevious guard #{testpath}/service.yml", 100)
 
     assert_match "Guard Succeeded",
       shell_output("#{bin}/kubevious guard #{testpath}/service.yml #{testpath}/deployment.yml")
-
   end
 end
