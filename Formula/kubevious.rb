@@ -1,7 +1,7 @@
 require "language/node"
 
 class Kubevious < Formula
-  desc "Kubevious CLI - Prevent Kubernetes disasters at the early stages"
+  desc "Detects and prevent Kubernetes misconfigurations and violations"
   homepage "https://github.com/kubevious/cli"
   url "https://github.com/kubevious/cli-releases/raw/main/v1.0.20/npm/kubevious.tgz"
   sha256 "86942cf385472e2650b9032894643dd3cc1557575aa9336120ffec08ecf391f0"
