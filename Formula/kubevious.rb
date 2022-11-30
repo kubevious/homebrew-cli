@@ -1,6 +1,6 @@
 require "language/node"
 
-class Foo < Formula
+class Kubevious < Formula
   desc "Kubevious CLI - Prevent Kubernetes disasters at the early stages"
   homepage "https://github.com/kubevious/cli"
   url "https://github.com/kubevious/cli-releases/raw/main/v1.0.20/npm/kubevious.tgz"
