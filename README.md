@@ -2,6 +2,11 @@
 Tap for Kubevious CLI project [https://github.com/kubevious/cli](https://github.com/kubevious/cli).
 
 ## Release Instructions
+```sh
+$ docker run -it --rm homebrew/brew
+
+brew bump-formula-pr kubevious --url=https://registry.npmjs.org/kubevious/-/kubevious-1.0.30.tgz  --debug
+```
 
 ### Setup Homebrew Core Repo
 ```
