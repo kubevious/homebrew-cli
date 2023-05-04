@@ -12,11 +12,11 @@ class Kubevious < Formula
     regex(/["']version["']:\s*?["']([^"']+)["']/i)
   end
 
-  depends_on "node@14"
+  depends_on "node@18"
 
   def install
     system "npm", "install", *Language::Node.std_npm_install_args(libexec)
-    (bin/"kubevious").write_env_script libexec/"bin/kubevious", PATH: "#{Formula["node@14"].opt_bin}:$PATH"
+    (bin/"kubevious").write_env_script libexec/"bin/kubevious", PATH: "#{Formula["node@18"].opt_bin}:$PATH"
   end
 
   test do
