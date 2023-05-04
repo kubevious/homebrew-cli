@@ -3,8 +3,8 @@ require "language/node"
 class Kubevious < Formula
   desc "Detects and prevents Kubernetes misconfigurations and violations"
   homepage "https://github.com/kubevious/kubevious"
-  url "https://registry.npmjs.org/kubevious/-/kubevious-1.0.54.tgz"
-  sha256 "b32836c53db828991310e64f0b74dddc551d3df27ebebb9854d541172e6a9a28"
+  url "https://registry.npmjs.org/kubevious/-/kubevious-1.0.55.tgz"
+  sha256 "d2d9b27b097bf66be001f3f2ae72568fe0137894323c7d3c82bdd8f0e825dce5"
   license "Apache-2.0"
 
   livecheck do
@@ -12,11 +12,11 @@ class Kubevious < Formula
     regex(/["']version["']:\s*?["']([^"']+)["']/i)
   end
 
-  depends_on "node@18"
+  depends_on "node@14"
 
   def install
     system "npm", "install", *Language::Node.std_npm_install_args(libexec)
-    (bin/"kubevious").write_env_script libexec/"bin/kubevious", PATH: "#{Formula["node@18"].opt_bin}:$PATH"
+    (bin/"kubevious").write_env_script libexec/"bin/kubevious", PATH: "#{Formula["node@14"].opt_bin}:$PATH"
   end
 
   test do
